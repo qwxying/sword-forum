@@ -33,7 +33,12 @@
             >{{ post | tabFormatter }}
           </span>
           <!--          帖子标题-->
-          <router-link :to="{ name: 'post_content', params: { id: post.id } }">
+          <router-link
+            :to="{
+              name: 'post_content',
+              params: { id: post.id, name: post.author.loginname }
+            }"
+          >
             <span class="title">
               {{ post.title }}
             </span>
