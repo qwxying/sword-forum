@@ -8,9 +8,11 @@
     <div class="posts" v-else>
       <ul>
         <li>
-          <div class="toobar">
-            <span>全部</span><span>精华</span><span>分享</span><span>问答</span
-            ><span>招聘</span>
+          <div class="topbar">
+            <span>全部</span>
+            <span>精华</span>
+            <span>分享</span>
+            <span>问答</span><span>招聘</span>
           </div>
         </li>
         <li v-for="post in posts">
@@ -31,9 +33,11 @@
             >{{ post | tabFormatter }}
           </span>
           <!--          帖子标题-->
-          <span class="title">
-            {{ post.title }}
-          </span>
+          <router-link :to="{ name: 'post_content', params: { id: post.id } }">
+            <span class="title">
+              {{ post.title }}
+            </span>
+          </router-link>
           <!--          最后回复时间-->
           <span class="last_reply">
             {{ post.last_reply_at | formatDate }}
@@ -64,7 +68,9 @@ export default {
           this.isLoading = false; //加载成功，不渲染gif
           this.posts = res.data.data;
         })
-        .catch(err => {});
+        .catch(err => {
+          console.log(err);
+        });
     }
   },
   beforeMount() {
@@ -78,6 +84,7 @@ export default {
 .PostList {
   background-color: #e1e1e1;
 }
+
 .posts {
   margin-top: 10px;
 }
@@ -90,9 +97,11 @@ export default {
 
 ul {
   list-style: none;
+
   width: 100%;
   max-width: 1344px;
   margin: 0 auto;
+  padding: 0;
 }
 
 ul li:not(:first-child) {
@@ -165,12 +174,12 @@ li span {
   font-size: 12px;
 }
 
-.toobar {
+.topbar {
   height: 40px;
   background-color: #f5f5f5;
 }
 
-.toobar span {
+.topbar span {
   font-size: 14px;
   color: #80bd01;
   line-height: 40px;
@@ -178,7 +187,7 @@ li span {
   cursor: pointer;
 }
 
-.toobar span:hover {
+.topbar span:hover {
   color: #9e78c0;
 }
 

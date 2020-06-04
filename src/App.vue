@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <Header />
-    <PostList />
+    <div class="main">
+      <router-view name="main"></router-view>
+    </div>
   </div>
 </template>
 
@@ -14,4 +16,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.main {
+  width: 80%;
+  margin: 0 auto;
+}
+</style>
