@@ -62,6 +62,11 @@ export default {
         });
     }
   },
+  watch: {
+    $route() {
+      this.getArticleData();
+    }
+  },
   beforeMount() {
     this.isLoading = true;
     this.getArticleData();
@@ -71,6 +76,7 @@ export default {
 
 <style>
 @import url("../assets/markdown-github.css");
+
 .topbar {
   padding: 10px;
   background-color: #f6f6f6;
@@ -106,6 +112,7 @@ export default {
   color: #666;
   text-decoration: none;
 }
+
 .replySec {
   border-bottom: 1px solid #e5e5e5;
   padding: 0 10px;
