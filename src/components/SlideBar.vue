@@ -75,12 +75,12 @@ export default {
   },
   computed: {
     topic_limit() {
-      if (this.userInfo.recent_topics.length) {
+      if (this.userInfo.recent_topics) {
         return this.userInfo.recent_topics.slice(0, 5);
       }
     },
     reply_limit() {
-      if (this.userInfo.recent_replies.length) {
+      if (this.userInfo.recent_replies) {
         return this.userInfo.recent_replies.slice(0, 5);
       }
     }

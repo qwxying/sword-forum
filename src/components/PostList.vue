@@ -48,26 +48,31 @@
             {{ post.last_reply_at | formatDate }}
           </span>
         </li>
+        <li>
+          <Pagination @handleList="renderList" />
+        </li>
       </ul>
     </div>
   </div>
 </template>
 
 <script>
+import Pagination from "./Pagination";
 export default {
   name: "PostList",
   data() {
     return {
       isLoading: false,
-      posts: [] //帖子主题列表
+      posts: [], //帖子主题列表
+      postpage: 1
     };
   },
+  components: { Pagination },
   methods: {
     getData() {
       this.$http
         .get("https://cnodejs.org/api/v1/topics", {
-          page: 1,
-          limit: 20
+          params: { page: this.postpage, limit: 20 }
         })
         .then(res => {
           this.isLoading = false; //加载成功，不渲染gif
@@ -76,6 +81,10 @@ export default {
         .catch(err => {
           console.log(err);
         });
+    },
+    renderList(value) {
+      this.postpage = value;
+      this.getData();
     }
   },
   beforeMount() {
